@@ -53,12 +53,31 @@ const antdColumns = computed(() => {
     dataIndex: c.dataIndex,
     key: c.dataIndex,
     fixed: c.fixed === true ? undefined : c.fixed,
-    sorter: c.sorter ? true : false
+    sorter: c.sorter ? true : false,
+    filters: getFilters(c),
+    filterMultiple: true,
   }));
 });
 
 const handleChange = (pagination: any, filters: any, sorter: any) => {
   props.onTableChange?.(pagination, filters, sorter);
+};
+
+const getFilters = (col: ProColumnType) => {
+  const enumData = props.valueEnumMap?.[col.dataIndex];
+  if (!enumData) return undefined;
+  if (Array.isArray(enumData)) {
+    return enumData
+      .filter((i: any) => i && i.value !== undefined)
+      .map((i: any) => ({ text: i.label ?? String(i.value), value: i.value }));
+  }
+  if (typeof enumData === 'object') {
+    return Object.entries(enumData).map(([value, meta]: any) => ({
+      text: typeof meta === 'object' && meta ? (meta.text ?? value) : value,
+      value,
+    }));
+  }
+  return undefined;
 };
 
 const formatValue = (val: any, dataIndex: string) => {
@@ -76,4 +95,3 @@ const formatValue = (val: any, dataIndex: string) => {
   return val;
 };
 </script>
-
