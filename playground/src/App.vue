@@ -82,6 +82,126 @@
 
       <section class="section">
         <div class="section-hd">
+          <h2 class="section-title">自定义表单项 & 单元格</h2>
+          <p class="section-desc">覆盖 form slot、cell slot、操作列、区间查询</p>
+        </div>
+        <div class="grid grid-2">
+          <el-card shadow="always" class="card">
+            <template #header>
+              <div class="card-title">用户列表（自定义 form / cell）</div>
+            </template>
+            <ElementProTable
+              :request="fetchUserList"
+              :columns="userColumns"
+              rowKey="id"
+              :search="{ defaultCollapsed: false }"
+            >
+              <template #form-role="{ model, field }">
+                <el-radio-group v-model="model[field]" size="small">
+                  <el-radio-button label="admin">管理员</el-radio-button>
+                  <el-radio-button label="user">普通用户</el-radio-button>
+                </el-radio-group>
+              </template>
+              <template #form-department="{ model, field }">
+                <div class="seg">
+                  <el-button size="small" :type="model[field] === undefined ? 'primary' : 'default'" @click="model[field] = undefined">全部</el-button>
+                  <el-button size="small" :type="model[field] === '研发' ? 'primary' : 'default'" @click="model[field] = '研发'">研发</el-button>
+                  <el-button size="small" :type="model[field] === '产品' ? 'primary' : 'default'" @click="model[field] = '产品'">产品</el-button>
+                  <el-button size="small" :type="model[field] === '运营' ? 'primary' : 'default'" @click="model[field] = '运营'">运营</el-button>
+                  <el-button size="small" :type="model[field] === '销售' ? 'primary' : 'default'" @click="model[field] = '销售'">销售</el-button>
+                </div>
+              </template>
+              <template #cell-name="{ record }">
+                <div class="cell-name">
+                  <el-avatar :size="28" :style="{ background: avatarBg(record.name) }">{{ String(record.name).slice(0, 1) }}</el-avatar>
+                  <div class="cell-name-main">
+                    <div class="cell-name-title">{{ record.name }}</div>
+                    <div class="cell-name-sub">ID: {{ record.id }} · {{ record.department }}</div>
+                  </div>
+                  <el-button link type="primary" @click="copyText(record.name)">复制</el-button>
+                </div>
+              </template>
+              <template #cell-department="{ record }">
+                <el-tag :type="deptTagType(record.department)" effect="dark">
+                  {{ record.department }}
+                </el-tag>
+              </template>
+              <template #cell-status="{ record }">
+                <el-tag :type="record.status === 'active' ? 'success' : 'danger'" effect="plain">
+                  {{ record.status === 'active' ? '正常' : '停用' }}
+                </el-tag>
+              </template>
+              <template #cell-createdAt="{ record }">
+                <el-tooltip :content="String(record.createdAt)" placement="top">
+                  <span class="mono">{{ new Date(record.createdAt).toLocaleString() }}</span>
+                </el-tooltip>
+              </template>
+            </ElementProTable>
+          </el-card>
+
+          <el-card shadow="always" class="card">
+            <template #header>
+              <div class="card-title">订单列表（区间查询 + 操作列）</div>
+            </template>
+            <ElementProTable
+              :request="fetchOrderList"
+              :columns="orderShowcaseColumns"
+              rowKey="id"
+              :search="{ defaultCollapsed: false }"
+              :debounceTime="120"
+            >
+              <template #form-amountRange="{ model, field }">
+                <div class="range">
+                  <el-slider
+                    v-model="model[field]"
+                    range
+                    :min="0"
+                    :max="900"
+                    :step="10"
+                    style="width: 260px"
+                  />
+                  <div class="range-text">{{ Array.isArray(model[field]) ? `${model[field][0]} ~ ${model[field][1]}` : '-' }}</div>
+                </div>
+              </template>
+              <template #form-channel="{ model, field }">
+                <el-checkbox-group v-model="model[field]" size="small">
+                  <el-checkbox-button label="alipay">支付宝</el-checkbox-button>
+                  <el-checkbox-button label="wechat">微信</el-checkbox-button>
+                  <el-checkbox-button label="card">银行卡</el-checkbox-button>
+                </el-checkbox-group>
+              </template>
+              <template #cell-orderNo="{ record }">
+                <div class="cell-order">
+                  <span class="mono">{{ record.orderNo }}</span>
+                  <el-button link type="primary" @click="copyText(record.orderNo)">复制</el-button>
+                </div>
+              </template>
+              <template #cell-amount="{ record }">
+                <div class="cell-amount">
+                  <span :class="['mono', record.amount >= 600 ? 't-hot' : record.amount >= 300 ? 't-warm' : 't-cool']">
+                    ￥{{ record.amount.toFixed(2) }}
+                  </span>
+                  <el-progress :percentage="Math.min(100, Math.round((record.amount / 900) * 100))" :stroke-width="10" :show-text="false" />
+                </div>
+              </template>
+              <template #cell-status="{ record }">
+                <el-tag :type="orderStatusTagType(record.status)">
+                  {{ orderStatusLabel(record.status) }}
+                </el-tag>
+              </template>
+              <template #cell-actions="{ record }">
+                <div class="cell-actions">
+                  <el-button size="small" type="primary" plain @click="openOrder(record.orderNo)">详情</el-button>
+                  <el-button size="small" @click="openOrder(record.orderNo)">退款</el-button>
+                </div>
+              </template>
+            </ElementProTable>
+          </el-card>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-hd">
           <h2 class="section-title">高级搜索：日期区间 + transform</h2>
           <p class="section-desc">使用 `search.transform` 将 “区间” 转为后端友好的 `createdAtStart/createdAtEnd`</p>
         </div>
@@ -213,6 +333,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { ElementProTable } from '@headless-pro-table/element-plus';
 import { AntdvProTable } from '@headless-pro-table/antdv';
+import { ElMessage } from 'element-plus';
 import { createProductColumns, fetchCategoryDict, fetchOrderList, fetchProductList, fetchUserList, orderColumns, userAdvancedColumns, userColumns } from './mock';
 
 const elSelectedKeys = ref<(string | number)[]>([]);
@@ -228,6 +349,24 @@ const orderForceError = ref(false);
 const orderKeyword = ref('');
 const orderError = ref('');
 const orderTick = ref(0);
+
+const orderShowcaseColumns = computed(() => {
+  const base = orderColumns.map((c) => c);
+  const amountRange = {
+    title: '金额区间',
+    dataIndex: 'amountRange',
+    hideInTable: true,
+    search: {
+      transform: (val: any) => {
+        if (!Array.isArray(val) || val.length !== 2) return {};
+        const [min, max] = val;
+        return { amountMin: min, amountMax: max };
+      }
+    }
+  };
+  const actions = { title: '操作', dataIndex: 'actions', hideInSearch: true };
+  return [amountRange as any, ...base, actions as any];
+});
 
 const handleElSelect = (keys: (string | number)[]) => {
   elSelectedKeys.value = keys;
@@ -265,6 +404,55 @@ const getOrderParams = () => {
 
 const handleOrderError = (e: Error) => {
   orderError.value = e.message || String(e);
+};
+
+const copyText = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    ElMessage.success('已复制');
+  } catch {
+    const input = document.createElement('textarea');
+    input.value = text;
+    input.style.position = 'fixed';
+    input.style.left = '-9999px';
+    input.style.top = '-9999px';
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+    ElMessage.success('已复制');
+  }
+};
+
+const avatarBg = (name: string) => {
+  let h = 0;
+  for (let i = 0; i < name.length; i += 1) h = (h * 31 + name.charCodeAt(i)) % 360;
+  return `hsl(${h} 70% 45%)`;
+};
+
+const deptTagType = (dept: string) => {
+  if (dept === '研发') return 'success';
+  if (dept === '产品') return 'warning';
+  if (dept === '运营') return 'info';
+  return 'danger';
+};
+
+const orderStatusLabel = (status: string) => {
+  if (status === 'pending') return '待支付';
+  if (status === 'paid') return '已支付';
+  if (status === 'refund') return '退款中';
+  return '已关闭';
+};
+
+const orderStatusTagType = (status: string) => {
+  if (status === 'paid') return 'success';
+  if (status === 'pending') return 'warning';
+  if (status === 'refund') return 'info';
+  return 'danger';
+};
+
+const openOrder = (orderNo: string) => {
+  ElMessage.info(`点击了 ${orderNo}`);
 };
 
 onMounted(async () => {
@@ -465,6 +653,83 @@ body {
 
 .alert {
   margin-bottom: 12px;
+}
+
+.mono {
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+.seg {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cell-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+}
+
+.cell-name-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.cell-name-title {
+  font-size: 13px;
+  line-height: 1.15;
+  color: rgba(15, 23, 42, 0.92);
+}
+
+.cell-name-sub {
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(15, 23, 42, 0.55);
+}
+
+.cell-order {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cell-amount {
+  display: grid;
+  gap: 6px;
+}
+
+.cell-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.t-hot {
+  color: #b42318;
+}
+
+.t-warm {
+  color: #b54708;
+}
+
+.t-cool {
+  color: #026aa2;
+}
+
+.range {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.range-text {
+  font-size: 12px;
+  color: rgba(15, 23, 42, 0.55);
+  min-width: 92px;
+  text-align: right;
 }
 
 @media (max-width: 1100px) {

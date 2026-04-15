@@ -203,10 +203,17 @@ export const fetchOrderList = async (params: any, sorter: any, filter: any) => {
       if (params.keyword) {
         data = data.filter((o) => o.orderNo.includes(String(params.keyword)));
       }
+      if (params.amountMin !== undefined || params.amountMax !== undefined) {
+        const min = params.amountMin !== undefined ? Number(params.amountMin) : -Infinity;
+        const max = params.amountMax !== undefined ? Number(params.amountMax) : Infinity;
+        data = data.filter((o) => o.amount >= min && o.amount <= max);
+      }
       if (params.status) {
         data = data.filter((o) => o.status === params.status);
       }
-      if (params.channel) {
+      if (Array.isArray(params.channel) && params.channel.length > 0) {
+        data = data.filter((o) => params.channel.includes(o.channel));
+      } else if (params.channel) {
         data = data.filter((o) => o.channel === params.channel);
       }
 
