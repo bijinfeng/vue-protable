@@ -24,6 +24,9 @@
       :label="col.title"
       :fixed="col.fixed"
       :sortable="col.sorter ? 'custom' : false"
+      :column-key="col.dataIndex"
+      :filters="getFilters(col)"
+      :filter-multiple="true"
     >
       <!-- 嵌套处理 Element 的具名作用域插槽 #default="{ row, column, $index }" -->
       <template #default="scope">
@@ -85,6 +88,23 @@ const handleSortChange = ({ prop, order }: any) => {
 
 const handleFilterChange = (filters: any) => {
   emit('table-change', {}, filters, {});
+};
+
+const getFilters = (col: ProColumnType) => {
+  const enumData = props.valueEnumMap?.[col.dataIndex];
+  if (!enumData) return undefined;
+  if (Array.isArray(enumData)) {
+    return enumData
+      .filter((i: any) => i && i.value !== undefined)
+      .map((i: any) => ({ text: i.label ?? String(i.value), value: i.value }));
+  }
+  if (typeof enumData === 'object') {
+    return Object.entries(enumData).map(([value, meta]: any) => ({
+      text: typeof meta === 'object' && meta ? (meta.text ?? value) : value,
+      value,
+    }));
+  }
+  return undefined;
 };
 
 // 根据字典回显

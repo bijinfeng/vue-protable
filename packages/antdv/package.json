@@ -6,6 +6,7 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
+    "prebuild": "pnpm -w --filter @headless-pro-table/core build",
     "build": "vite build && vue-tsc --emitDeclarationOnly"
   },
   "dependencies": {
@@ -20,4 +21,3 @@
     "@vitejs/plugin-vue": "^5.0.0"
   }
 }
-
