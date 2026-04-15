@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 222 47% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 7%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --border: 214 32% 91%;
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222 47% 5%;
+    --foreground: 210 40% 93%;
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 93%;
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 55%;
+    --border: 217 33% 13%;
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+  }
+}
+
+.inline-code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: oklch(0.6 0.2 0);
+  background: oklch(0.6 0.2 0 / 0.1);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.dark .inline-code {
+  color: #f9a8d4;
+  background: rgba(249, 168, 212, 0.1);
+}
