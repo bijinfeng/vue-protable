@@ -33,7 +33,7 @@ jobs:
           node-version: 20
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install
 
       - name: Build core
         run: pnpm --filter @vue-protable/core build
