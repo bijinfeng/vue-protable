@@ -19,15 +19,38 @@
         {{ copied ? '已复制' : '复制' }}
       </button>
     </div>
-    <pre class="m-0 px-[18px] py-4 overflow-x-auto bg-[#0d1117] dark:bg-[#0d1117] scrollbar-thin"><code class="font-mono text-[13px] leading-[1.65] text-foreground/82 whitespace-pre block">{{ code }}</code></pre>
+    <div
+      class="shiki-wrap overflow-x-auto scrollbar-thin text-[13px] leading-[1.65]"
+      v-html="highlighted"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watchEffect, onMounted, onUnmounted } from 'vue';
+import { codeToHtml } from 'shiki';
 
 const props = defineProps<{ code: string; lang?: string }>();
 const copied = ref(false);
+const highlighted = ref('');
+const isDark = ref(document.documentElement.classList.contains('dark'));
+
+let observer: MutationObserver;
+onMounted(() => {
+  observer = new MutationObserver(() => {
+    isDark.value = document.documentElement.classList.contains('dark');
+  });
+  observer.observe(document.documentElement, { attributeFilter: ['class'] });
+});
+onUnmounted(() => observer?.disconnect());
+
+watchEffect(async () => {
+  const theme = isDark.value ? 'github-dark' : 'github-light';
+  highlighted.value = await codeToHtml(props.code, {
+    lang: props.lang ?? 'typescript',
+    theme,
+  });
+});
 
 const copy = async () => {
   try {
@@ -46,3 +69,15 @@ const copy = async () => {
   setTimeout(() => (copied.value = false), 1800);
 };
 </script>
+
+<style>
+.shiki-wrap pre {
+  margin: 0;
+  padding: 16px 18px;
+}
+.shiki-wrap code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  line-height: 1.65;
+}
+</style>
