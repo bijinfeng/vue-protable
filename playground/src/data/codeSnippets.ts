@@ -1,8 +1,8 @@
 export const installCode = `# Element Plus adapter
-pnpm add @headless-pro-table/element-plus element-plus
+pnpm add @vue-protable/element-plus element-plus
 
 # Ant Design Vue adapter
-pnpm add @headless-pro-table/antdv ant-design-vue`;
+pnpm add @vue-protable/antdv ant-design-vue`;
 
 export const basicUsageCode = `<template>
   <ElementProTable
@@ -14,8 +14,8 @@ export const basicUsageCode = `<template>
 </template>
 
 <script setup lang="ts">
-import { ElementProTable } from '@headless-pro-table/element-plus'
-import type { ProColumnType } from '@headless-pro-table/core'
+import { ElementProTable } from '@vue-protable/element-plus'
+import type { ProColumnType } from '@vue-protable/core'
 
 interface User { id: number; name: string; status: string }
 
@@ -34,7 +34,7 @@ const fetchUsers = async (params, sorter, filter) => {
 }
 <\/script>`;
 
-export const customAdapterCode = `import { createProTable } from '@headless-pro-table/core'
+export const customAdapterCode = `import { createProTable } from '@vue-protable/core'
 import MyTable from './MyTable.vue'
 import MyForm from './MyForm.vue'
 import MyFormItem from './MyFormItem.vue'

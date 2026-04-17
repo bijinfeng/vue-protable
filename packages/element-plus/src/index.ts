@@ -1,4 +1,4 @@
-import { createProTable } from '@headless-pro-table/core';
+import { createProTable } from '@vue-protable/core';
 import { ElForm, ElFormItem, ElInput, ElPagination, ElButton, ElDatePicker } from 'element-plus';
 import ElementTableWrapper from './ElementTableWrapper.vue';
 import ElementSelectWrapper from './ElementSelectWrapper.vue';

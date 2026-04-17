@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import { ElementProTable } from '@headless-pro-table/element-plus'
+import { ElementProTable } from '@vue-protable/element-plus'
 import { createProductColumns, fetchCategoryDict, fetchProductList } from '@/mock'
 import DocSection from '@/components/DocSection.vue'
 import DemoBlock from '@/components/DemoBlock.vue'

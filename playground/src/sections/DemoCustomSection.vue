@@ -99,7 +99,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { ElMessage } from 'element-plus'
-import { ElementProTable } from '@headless-pro-table/element-plus'
+import { ElementProTable } from '@vue-protable/element-plus'
 import { fetchUserList, fetchOrderList, userColumns, orderColumns } from '@/mock'
 import DocSection from '@/components/DocSection.vue'
 import TabDemo from '@/components/TabDemo.vue'

@@ -58,7 +58,7 @@
 <script setup lang="ts">
 import { useSlots } from 'vue';
 import { ElTable, ElTableColumn } from 'element-plus';
-import type { ProColumnType } from '@headless-pro-table/core';
+import type { ProColumnType } from '@vue-protable/core';
 
 const props = defineProps<{
   dataSource: any[];

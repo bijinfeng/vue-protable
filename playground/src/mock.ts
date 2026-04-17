@@ -1,4 +1,4 @@
-import type { ProColumnType } from '@headless-pro-table/core';
+import type { ProColumnType } from '@vue-protable/core';
 import type { Ref } from 'vue';
 
 export interface UserItem {

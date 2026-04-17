@@ -12,7 +12,7 @@ export default defineConfig({
       formats: ['es', 'cjs']
     },
     rollupOptions: {
-      external: ['vue', 'ant-design-vue', '@headless-pro-table/core'],
+      external: ['vue', 'ant-design-vue', '@vue-protable/core'],
       output: {
         globals: {
           vue: 'Vue',

@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ElementProTable } from '@headless-pro-table/element-plus'
+import { ElementProTable } from '@vue-protable/element-plus'
 import { fetchOrderList, orderColumns } from '@/mock'
 import DocSection from '@/components/DocSection.vue'
 import DemoBlock from '@/components/DemoBlock.vue'

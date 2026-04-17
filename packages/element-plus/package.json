@@ -1,16 +1,16 @@
 {
-  "name": "@headless-pro-table/element-plus",
+  "name": "@vue-protable/element-plus",
   "version": "1.0.0",
   "description": "Element Plus Adapter for Headless ProTable",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prebuild": "pnpm -w --filter @headless-pro-table/core build",
+    "prebuild": "pnpm -w --filter @vue-protable/core build",
     "build": "vite build && vue-tsc --emitDeclarationOnly"
   },
   "dependencies": {
-    "@headless-pro-table/core": "workspace:*",
+    "@vue-protable/core": "workspace:*",
     "element-plus": "^2.5.0",
     "vue": "^3.4.0"
   },

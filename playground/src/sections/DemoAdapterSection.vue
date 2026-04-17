@@ -68,8 +68,8 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { ElementProTable } from '@headless-pro-table/element-plus'
-import { AntdvProTable } from '@headless-pro-table/antdv'
+import { ElementProTable } from '@vue-protable/element-plus'
+import { AntdvProTable } from '@vue-protable/antdv'
 import { theme as antdTheme } from 'ant-design-vue'
 import { fetchUserList, userColumns } from '@/mock'
 import DocSection from '@/components/DocSection.vue'

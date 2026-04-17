@@ -13,7 +13,7 @@ export default defineConfig({
       formats: ['es', 'cjs']
     },
     rollupOptions: {
-      external: ['vue', 'element-plus', '@headless-pro-table/core'],
+      external: ['vue', 'element-plus', '@vue-protable/core'],
       output: {
         globals: {
           vue: 'Vue',

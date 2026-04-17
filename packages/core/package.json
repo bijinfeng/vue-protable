@@ -1,5 +1,5 @@
 {
-  "name": "@headless-pro-table/core",
+  "name": "@vue-protable/core",
   "version": "1.0.0",
   "description": "Headless ProTable Core Logic for Vue 3",
   "main": "dist/index.js",

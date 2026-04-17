@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { ProColumnType } from '@headless-pro-table/core';
+import type { ProColumnType } from '@vue-protable/core';
 
 const props = defineProps<{
   dataSource: any[];

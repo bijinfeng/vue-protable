@@ -1,16 +1,16 @@
 {
-  "name": "@headless-pro-table/antdv",
+  "name": "@vue-protable/antdv",
   "version": "1.0.0",
   "description": "Ant Design Vue Adapter for Headless ProTable",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prebuild": "pnpm -w --filter @headless-pro-table/core build",
+    "prebuild": "pnpm -w --filter @vue-protable/core build",
     "build": "vite build && vue-tsc --emitDeclarationOnly"
   },
   "dependencies": {
-    "@headless-pro-table/core": "workspace:*",
+    "@vue-protable/core": "workspace:*",
     "ant-design-vue": "^4.0.0",
     "vue": "^3.4.0"
   },

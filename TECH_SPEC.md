@@ -9,8 +9,8 @@
 - **`createProTable` (Component Factory)**：视图组装层。接收一个 UI 适配器配置 (Adapter Registry)，返回一个标准的 Vue 组件 (`<ProTable>`)。该组件内部使用渲染函数 (`h` 或 JSX) 将核心状态绑定到适配器组件上。
 
 ### 1.2 UI 适配层 (Adapter Packages)
-- **`@headless-pro-table/element-plus`**：预置的 Element Plus 适配器。
-- **`@headless-pro-table/antdv`**：预置的 Ant Design Vue 适配器。
+- **`@vue-protable/element-plus`**：预置的 Element Plus 适配器。
+- **`@vue-protable/antdv`**：预置的 Ant Design Vue 适配器。
 开发者也可以通过传入自定义配置，轻松接入 Naive UI、Vuetify 等任何组件库。
 
 ---

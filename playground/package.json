@@ -7,9 +7,9 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@headless-pro-table/antdv": "workspace:*",
-    "@headless-pro-table/core": "workspace:*",
-    "@headless-pro-table/element-plus": "workspace:*",
+    "@vue-protable/antdv": "workspace:*",
+    "@vue-protable/core": "workspace:*",
+    "@vue-protable/element-plus": "workspace:*",
     "@tailwindcss/postcss": "^4.2.2",
     "@vueuse/core": "^14.2.1",
     "ant-design-vue": "^4.1.0",

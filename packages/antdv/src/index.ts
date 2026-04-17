@@ -1,4 +1,4 @@
-import { createProTable } from '@headless-pro-table/core';
+import { createProTable } from '@vue-protable/core';
 import { Form, Input, Button, DatePicker, Pagination } from 'ant-design-vue';
 import AntdTableWrapper from './AntdTableWrapper.vue';
 import AntdSelectWrapper from './AntdSelectWrapper.vue';

@@ -1,4 +1,4 @@
-# Vue Headless ProTable（Monorepo）
+# Vue ProTable
 
 一个面向 **Vue 3** 的 “Headless（无头）ProTable” 实现：核心层只负责 **数据请求/状态管理/列能力**，再通过 **UI Adapter（适配层）** 接入不同的组件库（当前内置 Element Plus 与 Ant Design Vue）。
 
@@ -7,11 +7,11 @@
 
 ## 包结构
 
-- [@headless-pro-table/core](file:///workspace/packages/core)：核心逻辑与类型
+- [@vue-protable/core](file:///workspace/packages/core)：核心逻辑与类型
   - `useProTable`：请求编排、分页/排序/筛选、搜索表单状态、跨页选中、可编辑、valueEnum 等
   - `createProTable`：基于 UI Adapter registry 组装出可用的 `ProTable` 组件
-- [@headless-pro-table/element-plus](file:///workspace/packages/element-plus)：Element Plus 适配器（导出 `ElementProTable`）
-- [@headless-pro-table/antdv](file:///workspace/packages/antdv)：Ant Design Vue 适配器（导出 `AntdvProTable`）
+- [@vue-protable/element-plus](file:///workspace/packages/element-plus)：Element Plus 适配器（导出 `ElementProTable`）
+- [@vue-protable/antdv](file:///workspace/packages/antdv)：Ant Design Vue 适配器（导出 `AntdvProTable`）
 - [playground](file:///workspace/playground)：本地演示与手动验证
 
 ## 本地开发
@@ -33,15 +33,15 @@ pnpm --filter playground dev
 ### 构建
 
 ```bash
-pnpm --filter @headless-pro-table/core build
-pnpm --filter @headless-pro-table/element-plus build
-pnpm --filter @headless-pro-table/antdv build
+pnpm --filter @vue-protable/core build
+pnpm --filter @vue-protable/element-plus build
+pnpm --filter @vue-protable/antdv build
 ```
 
 ### 测试（core）
 
 ```bash
-pnpm --filter @headless-pro-table/core test
+pnpm --filter @vue-protable/core test
 ```
 
 ## 使用方式
@@ -51,8 +51,8 @@ pnpm --filter @headless-pro-table/core test
 在你的项目中安装对应组件库后，直接使用已组装好的 ProTable：
 
 ```ts
-import { ElementProTable } from '@headless-pro-table/element-plus'
-// import { AntdvProTable } from '@headless-pro-table/antdv'
+import { ElementProTable } from "@vue-protable/element-plus";
+// import { AntdvProTable } from '@vue-protable/antdv'
 ```
 
 Playground 中有完整示例可参考：[App.vue](file:///workspace/playground/src/App.vue) 与 [mock.ts](file:///workspace/playground/src/mock.ts)。
@@ -62,7 +62,7 @@ Playground 中有完整示例可参考：[App.vue](file:///workspace/playground/
 如果你希望适配其它 UI 框架/自研组件库，可以基于 `createProTable` 注册 registry：
 
 ```ts
-import { createProTable } from '@headless-pro-table/core'
+import { createProTable } from "@vue-protable/core";
 
 export const MyProTable = createProTable({
   Table: MyTable,
@@ -74,7 +74,7 @@ export const MyProTable = createProTable({
   text: MyInput,
   select: MySelect,
   date: MyDatePicker,
-})
+});
 ```
 
 ## Columns 约定（摘要）
@@ -91,4 +91,3 @@ export const MyProTable = createProTable({
 ## License
 
 ISC
-
