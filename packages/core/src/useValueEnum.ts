@@ -1,7 +1,11 @@
 import { ref, unref, Ref, watch } from 'vue';
 import type { ProColumnType } from './types';
 
-export function useValueEnum(columnsRef: Ref<ProColumnType<any>[]> | ProColumnType<any>[]) {
+export function useValueEnum(columnsRef: Ref<ProColumnType<any>[]> | ProColumnType<any>[]): {
+  valueEnumMap: Ref<Record<string, any>>;
+  valueEnumLoadingMap: Ref<Record<string, boolean>>;
+  fetchValueEnum: (col: ProColumnType<any>) => Promise<void>;
+} {
   const columns = unref(columnsRef);
   
   // 维护每个字段的 valueEnum 数据
@@ -43,8 +47,8 @@ export function useValueEnum(columnsRef: Ref<ProColumnType<any>[]> | ProColumnTy
   }, { deep: true, flush: 'sync' });
 
   return {
-    valueEnumMap,
-    valueEnumLoadingMap,
-    fetchValueEnum,
+    valueEnumMap: valueEnumMap,
+    valueEnumLoadingMap: valueEnumLoadingMap,
+    fetchValueEnum: fetchValueEnum,
   };
 }

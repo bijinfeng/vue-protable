@@ -1,11 +1,16 @@
-import { defineConfig } from "tsdown";
-import vue from "@vitejs/plugin-vue";
+import { defineConfig } from 'tsdown'
+import Vue from 'unplugin-vue/rolldown'
 
 export default defineConfig({
-  entry: "src/index.ts",
-  format: ["esm", "cjs"],
-  dts: true,
+  entry: 'src/index.ts',
+  format: ['esm', 'cjs'],
+  platform: 'neutral',
+  dts: {
+    vue: true,
+  },
   clean: true,
   exports: true,
-  plugins: [vue()],
-});
+  plugins: [
+    Vue({ isProduction: true }),
+  ],
+})

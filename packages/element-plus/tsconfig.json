@@ -7,12 +7,14 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "isolatedDeclarations": true,
     "declaration": true,
+    "declarationMap": true,
+    "rootDir": "src",
     "outDir": "dist",
-    "baseUrl": ".",
     "jsx": "preserve",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src", "env.d.ts"]

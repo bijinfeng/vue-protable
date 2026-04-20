@@ -3,7 +3,7 @@ import { Form, Input, Button, DatePicker, Pagination } from 'ant-design-vue';
 import AntdTableWrapper from './AntdTableWrapper.vue';
 import AntdSelectWrapper from './AntdSelectWrapper.vue';
 
-export const AntdvProTable = createProTable({
+export const AntdvProTable: import('vue').Component = createProTable({
   Table: AntdTableWrapper,
   Form: {
     component: Form,

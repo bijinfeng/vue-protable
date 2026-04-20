@@ -7,7 +7,14 @@ export interface ColumnState {
   order?: number;
 }
 
-export function useColumnManager<T>(columnsRef: Ref<ProColumnType<T>[]> | ProColumnType<T>[]) {
+export function useColumnManager<T>(columnsRef: Ref<ProColumnType<T>[]> | ProColumnType<T>[]): {
+  columnsMap: Ref<Record<string, ColumnState>>;
+  displayColumns: import('vue').ComputedRef<ProColumnType<T>[]>;
+  setColumnVisibility: (dataIndex: string, show: boolean) => void;
+  setColumnFixed: (dataIndex: string, fixed: 'left' | 'right' | boolean) => void;
+  setColumnOrder: (dataIndex: string, order: number) => void;
+  resetColumns: () => void;
+} {
   const initialColumns = unref(columnsRef);
   
   // 内部维护一个列状态 Map (以 dataIndex 为 key)
@@ -74,11 +81,11 @@ export function useColumnManager<T>(columnsRef: Ref<ProColumnType<T>[]> | ProCol
   };
 
   return {
-    columnsMap,
-    displayColumns,
-    setColumnVisibility,
-    setColumnFixed,
-    setColumnOrder,
-    resetColumns,
+    columnsMap: columnsMap,
+    displayColumns: displayColumns,
+    setColumnVisibility: setColumnVisibility,
+    setColumnFixed: setColumnFixed,
+    setColumnOrder: setColumnOrder,
+    resetColumns: resetColumns,
   };
 }

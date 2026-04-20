@@ -3,7 +3,7 @@ import { ElForm, ElFormItem, ElInput, ElPagination, ElButton, ElDatePicker } fro
 import ElementTableWrapper from './ElementTableWrapper.vue';
 import ElementSelectWrapper from './ElementSelectWrapper.vue';
 
-export const ElementProTable = createProTable({
+export const ElementProTable: import('vue').Component = createProTable({
   Table: ElementTableWrapper,
   Form: {
     component: ElForm,

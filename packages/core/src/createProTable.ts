@@ -2,7 +2,7 @@ import { defineComponent, h, PropType } from 'vue';
 import { useProTable } from './useProTable';
 import type { UseProTableOptions, ProColumnType, UIAdapterRegistry } from './types';
 
-export function createProTable(registry: UIAdapterRegistry) {
+export function createProTable(registry: UIAdapterRegistry): import('vue').Component {
   return defineComponent({
     name: 'ProTable',
     props: {

@@ -13,7 +13,9 @@
     "happy-dom": "catalog:",
     "tsdown": "catalog:",
     "typescript": "catalog:",
+    "unplugin-vue": "^7.1.1",
     "vitest": "catalog:",
-    "vue": "catalog:"
+    "vue": "catalog:",
+    "vue-tsc": "^3.2.7"
   }
 }
