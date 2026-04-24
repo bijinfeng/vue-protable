@@ -13,9 +13,10 @@
     "rootDir": "src",
     "outDir": "dist",
     "jsx": "preserve",
+    "jsxImportSource": "vue",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["./src/*"],
+    },
   },
-  "include": ["src"]
+  "include": ["src"],
 }

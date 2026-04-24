@@ -35,7 +35,10 @@
     "vue": "catalog:"
   },
   "devDependencies": {
-    "vue": "catalog:"
+    "unplugin-vue": "catalog:",
+    "unplugin-vue-jsx": "catalog:",
+    "vue": "catalog:",
+    "vue-tsc": "catalog:"
   },
   "publishConfig": {
     "access": "public",

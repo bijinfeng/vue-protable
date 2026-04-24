@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { badgeVariants, type BadgeVariants } from '.'
+import { badgeVariants } from '.'
 import { cn } from '@/lib/utils'
 
-const props = defineProps<BadgeVariants>()
+const props = defineProps<{
+  variant?: 'default' | 'secondary' | 'outline';
+  class?: string;
+}>()
 
-const classes = computed(() => cn(badgeVariants({ variant: props.variant })))
+const classes = computed(() => cn(badgeVariants({ variant: props.variant }), props.class))
 </script>
 
 <template>

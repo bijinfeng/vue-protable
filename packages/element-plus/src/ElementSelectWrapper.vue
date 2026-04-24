@@ -15,7 +15,7 @@
         :value="item.value"
       />
     </template>
-    
+
     <!-- 解析 options 对象映射 (Record) -->
     <template v-else-if="options && typeof options === 'object'">
       <el-option
@@ -29,8 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { ElSelect, ElOption } from 'element-plus';
+import { computed } from "vue";
+import { ElSelect, ElOption } from "element-plus";
 
 const props = defineProps<{
   value?: any;
@@ -38,13 +38,13 @@ const props = defineProps<{
   options?: any[] | Record<string, { text: string; status?: string }>;
 }>();
 
-const emit = defineEmits(['update:value', 'change']);
+const emit = defineEmits(["update:value", "change"]);
 
 const modelValue = computed({
   get: () => props.value,
   set: (val) => {
-    emit('update:value', val);
-    emit('change', val);
-  }
+    emit("update:value", val);
+    emit("change", val);
+  },
 });
 </script>

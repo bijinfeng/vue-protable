@@ -26,7 +26,10 @@
   ],
   "scripts": {
     "prebuild": "pnpm -w --filter @vue-protable/core build",
-    "build": "tsdown"
+    "build": "tsdown",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@vue-protable/core": "workspace:*"
@@ -40,7 +43,11 @@
     "vue": "catalog:",
     "unplugin-vue": "catalog:",
     "unplugin-vue-jsx": "catalog:",
-    "vue-tsc": "catalog:"
+    "vue-tsc": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/test-utils": "catalog:",
+    "happy-dom": "catalog:",
+    "vitest": "catalog:"
   },
   "publishConfig": {
     "access": "public",

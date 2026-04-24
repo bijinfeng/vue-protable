@@ -8,9 +8,15 @@
     <SlotsSection />
 
     <DemoAdapterSection />
+    <DemoShadcnSection />
     <DemoCustomSection />
+    <DemoValueTypesSection />
     <DemoAdvancedSearchSection />
     <DemoDependenciesSection />
+    <DemoEditableSection />
+    <DemoBatchActionsSection />
+    <DemoToolbarSection />
+    <DemoColumnSettingsSection />
     <DemoPollingSection />
     <DemoManualSection />
   </DocsLayout>
@@ -24,9 +30,15 @@ import PropsSection from './sections/PropsSection.vue'
 import ColumnApiSection from './sections/ColumnApiSection.vue'
 import SlotsSection from './sections/SlotsSection.vue'
 import DemoAdapterSection from './sections/DemoAdapterSection.vue'
+import DemoShadcnSection from './sections/DemoShadcnSection.vue'
 import DemoCustomSection from './sections/DemoCustomSection.vue'
+import DemoValueTypesSection from './sections/DemoValueTypesSection.vue'
 import DemoAdvancedSearchSection from './sections/DemoAdvancedSearchSection.vue'
 import DemoDependenciesSection from './sections/DemoDependenciesSection.vue'
+import DemoEditableSection from './sections/DemoEditableSection.vue'
+import DemoBatchActionsSection from './sections/DemoBatchActionsSection.vue'
+import DemoToolbarSection from './sections/DemoToolbarSection.vue'
+import DemoColumnSettingsSection from './sections/DemoColumnSettingsSection.vue'
 import DemoPollingSection from './sections/DemoPollingSection.vue'
 import DemoManualSection from './sections/DemoManualSection.vue'
 </script>
